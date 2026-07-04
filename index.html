@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Endpoint Security — Best EDR & XDR Platforms Compared</title>
+<meta name="description" content="Compare the best endpoint detection and response (EDR) and extended detection and response (XDR) platforms for 2026. Independent reviews of CrowdStrike, SentinelOne, Microsoft Defender, and more.">
+<meta name="keywords" content="endpoint security, EDR, XDR, endpoint detection and response, CrowdStrike, SentinelOne, best EDR platform">
+<meta property="og:title" content="Endpoint Security — Best EDR & XDR Platforms Compared">
+<meta property="og:description" content="Compare the best endpoint detection and response (EDR) and extended detection and response (XDR) platforms for 2026. Independent reviews of CrowdStrike, SentinelOne, Microsoft Defender, and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://endpointsecurity.io">
+<link rel="canonical" href="https://endpointsecurity.io">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --text: #e8e8e8;
+  --text-muted: #888888;
+  --border: #222222;
+  --accent: var(--site-accent, #e8e8e8);
+  --accent-light: var(--site-accent-light, #333333);
+  --accent-dark: var(--site-accent-dark, #cccccc);
+  --max-w: 1080px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--text);
+}
+
+/* --- Nav --- */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.nav-updated {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* --- Hero --- */
+
+.hero {
+  padding: 8rem 1.5rem 5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  max-width: 720px;
+  margin-bottom: 1rem;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+/* --- Content --- */
+
+.content {
+  padding-bottom: 2rem;
+}
+
+.section-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- Intro --- */
+
+.intro {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.intro-copy {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 640px;
+  line-height: 1.8;
+}
+
+/* --- Section Labels & Titles --- */
+
+.section-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+}
+
+/* --- Comparison / Cards --- */
+
+.comparison {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: #444;
+}
+
+.card-featured {
+  border-left: 3px solid var(--accent);
+}
+
+.card-icon {
+  display: none;
+}
+
+.card-header {
+  margin-bottom: 1.25rem;
+}
+
+.card-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25rem;
+}
+
+.card-tagline {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.card-features {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.card-features li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.35rem 0;
+  padding-left: 1.25rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.card-features li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.card-pricing {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding-top: 1rem;
+  margin-bottom: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.card-pricing strong {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.65rem 1.5rem;
+  border-radius: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  margin-top: auto;
+}
+
+.card-cta:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* --- Guide --- */
+
+.guide {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-content {
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 640px;
+  font-size: 0.95rem;
+}
+
+.guide-content h3 {
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 2rem 0 0.75rem;
+}
+
+.guide-content h3:first-child {
+  margin-top: 0;
+}
+
+.guide-content p {
+  margin-bottom: 1rem;
+}
+
+/* --- FAQ --- */
+
+.faq {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1.25rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+  gap: 1rem;
+}
+
+.faq-q::after {
+  content: '+';
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.faq-q.open::after {
+  content: '\2212';
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-a.open {
+  max-height: 600px;
+  padding-bottom: 1.25rem;
+}
+
+.faq-a p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 640px;
+}
+
+/* --- Footer --- */
+
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 3rem 0 2rem;
+}
+
+.footer-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-disc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--text);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 0 2rem;
+}
+
+.footer-bottom p {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 700px) {
+  .hero {
+    padding: 7rem 1.5rem 3.5rem;
+  }
+
+  .intro,
+  .comparison,
+  .guide,
+  .faq {
+    padding: 3.5rem 0;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Endpoint Security</a>
+    <span class="nav-updated">Updated July 2026</span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">Protect every endpoint</h1>
+    <p class="hero-sub">Independent comparisons of EDR, XDR, and endpoint protection platforms — cut through vendor marketing and find the right solution for your organization.</p>
+  </div>
+</header>
+
+<main class="content">
+  <section class="intro">
+    <div class="section-wrap">
+      <p class="intro-copy">With remote work and BYOD policies expanding the attack surface, endpoint security has never been more critical. The EDR/XDR market is crowded with overlapping claims. We break down the top platforms by detection capability, response automation, deployment complexity, and total cost of ownership.</p>
+    </div>
+  </section>
+
+  <section class="comparison" id="compare">
+    <div class="section-wrap">
+      <span class="section-label">Comparison</span>
+      <h2 class="section-title">Top endpoint security platforms compared</h2>
+      <div class="cards">
+        <div class="card card-featured">
+  <span class="card-icon">🦅</span>
+  <div class="card-header">
+    <div class="card-name">CrowdStrike Falcon</div>
+    <div class="card-tagline">Cloud-native EDR market leader</div>
+  </div>
+  <p class="card-desc">CrowdStrike pioneered cloud-native endpoint security and consistently leads in analyst evaluations. The lightweight Falcon agent provides real-time threat detection, automated response, and integrated threat intelligence. Used by over 29,000 organizations globally.</p>
+  <ul class="card-features">
+    Cloud-native single-agent architecture,AI-powered threat detection,Integrated threat intelligence,24/7 managed threat hunting (Falcon OverWatch),15-day average time from deployment to value
+  </ul>
+  <div class="card-pricing"><strong>$8.99/endpoint/mo</strong> — Falcon Go (up to 100 endpoints)</div>
+  <a href="#affiliate-crowdstrike" class="card-cta" target="_blank" rel="noopener nofollow">Visit CrowdStrike</a>
+</div>
+<div class="card card-featured">
+  <span class="card-icon">🤖</span>
+  <div class="card-header">
+    <div class="card-name">SentinelOne Singularity</div>
+    <div class="card-tagline">Autonomous AI-driven XDR</div>
+  </div>
+  <p class="card-desc">SentinelOne's Singularity platform uses behavioral AI to detect and autonomously respond to threats without human intervention. Its storyline technology maps entire attack chains, and one-click remediation can roll back ransomware damage.</p>
+  <ul class="card-features">
+    Autonomous detection and response,Storyline attack visualization,One-click ransomware rollback,Kubernetes and cloud workload protection,No cloud connectivity required for detection
+  </ul>
+  <div class="card-pricing"><strong>$6/endpoint/mo</strong> — Singularity Control</div>
+  <a href="#affiliate-sentinelone" class="card-cta" target="_blank" rel="noopener nofollow">Visit SentinelOne</a>
+</div>
+<div class="card">
+  <span class="card-icon">🪟</span>
+  <div class="card-header">
+    <div class="card-name">Microsoft Defender for Endpoint</div>
+    <div class="card-tagline">Deep Microsoft ecosystem integration</div>
+  </div>
+  <p class="card-desc">If your organization is already invested in Microsoft 365, Defender for Endpoint offers compelling value through native integration with Azure AD, Intune, and the broader Microsoft security stack. Included in some M365 E5 licenses.</p>
+  <ul class="card-features">
+    Included in M365 E5 license,Native Azure AD and Intune integration,Threat and vulnerability management,Attack surface reduction rules,Cross-platform (Windows, macOS, Linux, mobile)
+  </ul>
+  <div class="card-pricing"><strong>$5.20/user/mo</strong> — Plan 2 standalone</div>
+  <a href="#affiliate-msdefender" class="card-cta" target="_blank" rel="noopener nofollow">Visit Microsoft</a>
+</div>
+<div class="card">
+  <span class="card-icon">🔥</span>
+  <div class="card-header">
+    <div class="card-name">Palo Alto Cortex XDR</div>
+    <div class="card-tagline">Network-to-endpoint XDR</div>
+  </div>
+  <p class="card-desc">Cortex XDR combines endpoint, network, and cloud data for comprehensive threat detection. Particularly strong if you already use Palo Alto firewalls — the integration provides unmatched cross-layer visibility and automated response.</p>
+  <ul class="card-features">
+    Integrates endpoint, network, and cloud data,Behavioral analytics and ML detection,Automated root cause analysis,Native integration with Palo Alto NGFW,Forensic investigation tools
+  </ul>
+  <div class="card-pricing">Contact for pricing — enterprise agreements</div>
+  <a href="#affiliate-cortex" class="card-cta" target="_blank" rel="noopener nofollow">Visit Palo Alto</a>
+</div>
+<div class="card">
+  <span class="card-icon">🛡️</span>
+  <div class="card-header">
+    <div class="card-name">Sophos Intercept X</div>
+    <div class="card-tagline">Anti-ransomware specialist</div>
+  </div>
+  <p class="card-desc">Sophos Intercept X is known for industry-leading anti-ransomware technology including CryptoGuard. It combines deep learning AI with anti-exploit technology and includes a built-in MDR option at competitive pricing.</p>
+  <ul class="card-features">
+    CryptoGuard anti-ransomware,Deep learning malware detection,Anti-exploit technology,Built-in MDR option,Central management via Sophos Central
+  </ul>
+  <div class="card-pricing">From <strong>$28/user/year</strong> — Intercept X Advanced</div>
+  <a href="#affiliate-sophos" class="card-cta" target="_blank" rel="noopener nofollow">Visit Sophos</a>
+</div>
+<div class="card">
+  <span class="card-icon">🔍</span>
+  <div class="card-header">
+    <div class="card-name">Elastic Security</div>
+    <div class="card-tagline">Open-source SIEM + endpoint</div>
+  </div>
+  <p class="card-desc">Elastic Security combines free and open endpoint protection with SIEM capabilities built on Elasticsearch. Ideal for teams that want full data ownership, custom detection rules, and no per-endpoint licensing.</p>
+  <ul class="card-features">
+    Free and open endpoint agent,No per-endpoint licensing fees,Built-in SIEM capabilities,Custom detection rules with EQL,Self-hosted or Elastic Cloud
+  </ul>
+  <div class="card-pricing"><strong>Free</strong> (self-hosted) or from <strong>$95/mo</strong> (Elastic Cloud)</div>
+  <a href="#affiliate-elastic" class="card-cta" target="_blank" rel="noopener nofollow">Visit Elastic</a>
+</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="guide" id="guide">
+    <div class="section-wrap">
+      <span class="section-label">Guide</span>
+      <h2 class="section-title">How to choose an endpoint security platform</h2>
+      <div class="guide-content"><h3>Define your threat model</h3><p>Before evaluating platforms, understand what you're protecting against. A 50-person startup faces different threats than a 10,000-employee enterprise with compliance requirements. Consider your industry, data sensitivity, and regulatory obligations (HIPAA, SOC 2, PCI-DSS).</p><h3>EDR vs. XDR vs. EPP</h3><p>Endpoint Protection Platforms (EPP) focus on prevention — antivirus, firewall, device control. EDR adds detection and response — behavioral analysis, threat hunting, incident investigation. XDR extends beyond endpoints to network, email, cloud, and identity. Most organizations benefit from EDR at minimum.</p><h3>Cloud-native vs. on-premise</h3><p>Cloud-native solutions (CrowdStrike, SentinelOne) deploy faster and update automatically. On-premise options give you more control over data but require infrastructure investment. Hybrid deployments are increasingly common.</p><h3>Managed vs. self-managed</h3><p>If your team lacks 24/7 security operations capability, consider platforms with built-in managed detection and response (MDR). Some vendors include MDR in their pricing; others charge separately.</p></div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="section-wrap">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list" id="faq-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-name">Endpoint Security</span>
+        <p class="footer-disc">EndpointSecurity.io provides independent comparisons of cybersecurity platforms. We may earn referral fees through partner links. Our reviews are based on independent research and testing.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://sepehr.ai" target="_blank" rel="noopener">sepehr.ai</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Endpoint Security. Some links on this site are partner links. We may earn a referral fee at no extra cost to you.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SITE_CONFIG = {"faqs":[{"q":"What's the difference between EDR and antivirus?","a":"Traditional antivirus uses signature-based detection to block known malware. EDR goes further by monitoring endpoint behavior in real-time, detecting unknown threats through behavioral analysis, and providing investigation and response tools. Think of antivirus as a lock on your door and EDR as a security camera system with an alarm."},{"q":"Do I need XDR or is EDR enough?","a":"EDR is sufficient for most organizations that primarily need endpoint protection. XDR adds value when you want correlated detection across endpoints, network, email, and cloud — reducing alert fatigue and catching multi-stage attacks that span multiple vectors. If your security team is small, XDR's automated correlation can be a force multiplier."},{"q":"How long does deployment typically take?","a":"Cloud-native solutions like CrowdStrike and SentinelOne can be deployed to thousands of endpoints in hours. On-premise solutions or those requiring network architecture changes may take weeks. Most vendors offer phased rollout options starting with a pilot group."},{"q":"Can these platforms protect remote workers?","a":"Yes, all modern EDR/XDR platforms are designed for remote and hybrid workforces. Cloud-native solutions are particularly well-suited since the agent communicates directly with the cloud console regardless of the endpoint's network location."},{"q":"What about Linux and macOS support?","a":"All platforms listed here support Windows, macOS, and Linux to varying degrees. CrowdStrike and SentinelOne have the strongest cross-platform parity. Microsoft Defender has improved significantly on macOS and Linux but some features remain Windows-first."}],"accentColor":"#7c3aed","accentLight":"#ede9fe","accentDark":"#6d28d9","ctaText":""};
+document.addEventListener('DOMContentLoaded', () => {
+  // Set accent color from config
+  if (SITE_CONFIG.accentColor) {
+    document.documentElement.style.setProperty('--site-accent', SITE_CONFIG.accentColor);
+  }
+  if (SITE_CONFIG.accentLight) {
+    document.documentElement.style.setProperty('--site-accent-light', SITE_CONFIG.accentLight);
+  }
+  if (SITE_CONFIG.accentDark) {
+    document.documentElement.style.setProperty('--site-accent-dark', SITE_CONFIG.accentDark);
+  }
+
+  // Build FAQ accordion
+  const faqList = document.getElementById('faq-list');
+  if (SITE_CONFIG.faqs && faqList) {
+    SITE_CONFIG.faqs.forEach(faq => {
+      const item = document.createElement('div');
+      item.className = 'faq-item';
+      item.innerHTML = `
+        <button class="faq-q">${faq.q}</button>
+        <div class="faq-a"><p>${faq.a}</p></div>
+      `;
+      const btn = item.querySelector('.faq-q');
+      const answer = item.querySelector('.faq-a');
+      btn.addEventListener('click', () => {
+        const isOpen = btn.classList.contains('open');
+        // Close all others
+        faqList.querySelectorAll('.faq-q.open').forEach(openBtn => {
+          openBtn.classList.remove('open');
+          openBtn.closest('.faq-item').querySelector('.faq-a').classList.remove('open');
+        });
+        // Toggle current
+        if (!isOpen) {
+          btn.classList.add('open');
+          answer.classList.add('open');
+        }
+      });
+      faqList.appendChild(item);
+    });
+  }
+});
+
+</script>
+</body>
+</html>
